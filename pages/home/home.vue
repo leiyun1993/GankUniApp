@@ -27,7 +27,7 @@
 						<view class="flex">
 							<view class="flex-sub">
 								<view class="">
-									<view class="text-content">
+									<view class="text-content  text-cut2">
 										{{citem.desc}}
 									</view>
 									<view class="p-xs margin-bottom-sm mb-sm" style="margin-top: 10upx;">

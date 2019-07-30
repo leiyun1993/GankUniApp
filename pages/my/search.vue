@@ -1,23 +1,27 @@
-<template name="classify">
+<template>
 	<view>
 		<scroll-view scroll-y class="page" lower-threshold="60px" @scrolltolower="scrolltolower">
 			<!-- title -->
-			<cu-custom bgColor="bg-gradual-green" :isBack="false">
-				<block slot="content">分类</block>
+			<cu-custom bgColor="bg-gradual-green" :isBack="true">
+				<block slot="content">搜索</block>
 			</cu-custom>
 			<!-- content -->
-			<scroll-view scroll-x class="bg-white nav fixed" :style="[{top:CustomBar + 'px'}]" scroll-with-animation :scroll-left="scrollLeft">
-				<view class="cu-item" :class="index==TabCur?'text-green cur':''" v-for="(item,index) in tabs" :key="index" @tap="tabSelect" :data-id="index">
-					{{item.name}}
+			<view class="cu-bar search bg-white nav fixed" :style="[{top:CustomBar + 'px'}]">
+				<view class="search-form round">
+					<text class="cuIcon-search"></text>
+					<input @input="keywordInput" @confirm="searchClick" :adjust-position="false" type="text" placeholder="搜索图片、文章、视频" confirm-type="search"></input>
 				</view>
-			</scroll-view>
+				<view class="action">
+					<button class="cu-btn bg-green shadow-blur round" @tap="searchClick">搜索</button>
+				</view>
+			</view>
 			<view class="classify-content">
 				<view v-for="(item,index) in dataList" :key="index" class="cu-card dynamic no-card" @tap="onItemClick" :data-url="item.url">
 					<view class="cu-item shadow solid-bottom" style="padding: 0 30upx;">
 						<view class="flex">
 							<view class="flex-sub">
 								<view class="">
-									<view class="text-content  text-cut2">
+									<view class="text-content text-cut2">
 										{{item.desc}}
 									</view>
 									<view class="p-xs margin-bottom-sm mb-sm" style="margin-top: 10upx;">
@@ -36,67 +40,61 @@
 				</view>
 				<view class="cu-load bg-white" v-if="showLoading" :class="loading?'loading':'over'"></view>
 			</view>
-			<!-- 底部占位 -->
-			<view class="cu-tabbar-height"></view>
 		</scroll-view>
 	</view>
 </template>
 
 <script>
 	import api from "../../api/api.js";
-	export default{
-		data(){
-			return{
-				showLoading:false,
-				loading:true,
-				CustomBar:this.CustomBar,
-				TabCur:0,
-				scrollLeft: 0,
-				tabs:[
-					{name:"全部",category:"all"},
-					{name:"Android ",category:"Android"},
-					{name:"iOS",category:"iOS"},
-					{name:"App",category:"App"},
-					{name:"前端",category:"前端"},
-					{name:"瞎推荐",category:"瞎推荐"},
-					{name:"拓展资源 ",category:"拓展资源"},
-					{name:"休息视频 ",category:"休息视频"}
-				],
-				dataList:[],
-				page:1
+	export default {
+		data() {
+			return {
+				showLoading: false,
+				loading: true,
+				CustomBar: this.CustomBar,
+				dataList: [],
+				page: 1,
+				key: ""
 			}
 		},
-		mounted(){
-			this.getList();
+		mounted() {
+			
 		},
-		methods:{
-			tabSelect(event){
-				this.TabCur = event.currentTarget.dataset.id;
-				this.scrollLeft = (event.currentTarget.dataset.id - 1) * 60;
-				this.page=1;
-				this.loading = true;
+		methods: {
+			getList() {
+				this.showLoading = true;
+				api.get(`/search/query/${this.key}/category/all/count/10/page/${this.page}`)
+					.then(res => {
+
+						this.dataList = this.page == 1 ? res.results : this.dataList.concat(res.results);
+						this.page++;
+						if (res.results.length === 0) {
+							this.loading = false;
+						} else {
+							this.showLoading = false;
+						}
+					}).catch(e => {
+						if (this.page == 1) {
+							this.dataList = [];
+						}
+						this.loading = false;
+					})
+			},
+			keywordInput(event) {
+				this.key = event.detail.value;
+			},
+
+			searchClick() {
+				if (!this.key) {
+					uni.showToast({
+						icon: "none",
+						title: "请输入搜索内容"
+					})
+					return;
+				}
 				this.getList();
 			},
-			getList(){
-				this.showLoading = true;
-				api.get(`/data/${this.tabs[this.TabCur].category}/10/${this.page}`)
-				.then(res=>{
-					
-					this.dataList = this.page==1?res.results:this.dataList.concat(res.results);
-					this.page++;
-					if(res.results.length===0){
-						this.loading = false;
-					}else{
-						this.showLoading = false;
-					}
-				}).catch(e=>{
-					if(this.page==1){
-						this.dataList=[];
-					}
-					this.loading = false;
-				})
-			},
-			scrolltolower(){
+			scrolltolower() {
 				if (!this.showLoading) {
 					this.getList();
 				}
@@ -113,8 +111,4 @@
 </script>
 
 <style>
-		
-	.classify-content{
-		padding-top: 90upx;
-	}
 </style>

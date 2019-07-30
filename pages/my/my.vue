@@ -12,10 +12,10 @@
 			</view>
 			<!-- content -->
 			<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
-				<view class="cu-item arrow">
+				<view class="cu-item arrow" @tap="onItemClick" data-type="search">
 					<view class="flex">
 						<text class="cuIcon-search text-grey"></text>
-						<text class="text-grey" style="margin-left: 5px;">搜索干货</text>
+						<text class="text-grey" style="margin-left: 5px;" >搜索干货</text>
 					</view>
 				</view>
 				<view class="cu-item arrow">
@@ -65,6 +65,11 @@
 					case "about":
 						uni.navigateTo({
 							url: "/pages/my/about"
+						})
+						break;
+					case "search":
+						uni.navigateTo({
+							url: "/pages/my/search"
 						})
 						break;
 					case "like":
