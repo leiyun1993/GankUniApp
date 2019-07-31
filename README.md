@@ -19,10 +19,39 @@ uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编�
 > * [Vue](http://doc.vue-js.com/)
 > * [微信小程序开发指南](https://developers.weixin.qq.com/miniprogram/dev/api/)
 
-### 3.2、小程序预览
+### 3.2、实现功能
+
+- [ ] 闲读
+- [x] 今日最新干货
+- [x] 分类阅读
+- [x] 提交干货
+- [x] 妹子列表
+- [x] 搜索干货
+- [x] 历史干货
+- [x] 查看其它Gank项目
+- [x] 模拟登陆
+
+### 3.3、小程序预览
 
 ![tab页面](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/01.jpg)
  
 ![我的相关](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/02.jpg)
  
 ![登录、发布](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/03.jpg)
+
+### 3.4、titleBar和tabBar说明
+二者均使用自定义完成,均使用[ColorUI](https://github.com/weilanwl/ColorUI/)组件库的开源样式。
+
+首先在[App.vue](https://github.com/leiyun1993/GankUniApp/blob/master/App.vue)中计算出title需要的高度;
+
+然后自定义控件中设置所需高度即可[cu-custom.vue](https://github.com/leiyun1993/GankUniApp/blob/master/colorui/components/cu-custom.vue);
+
+tabBar的实现请参考小程序入口文件[index.vue](https://github.com/leiyun1993/GankUniApp/blob/master/pages/index/index.vue)
+
+## 开源组件
+[ColorUI](https://github.com/weilanwl/ColorUI/)
+
+## TODO
+- [ ] H5
+- [ ] Android端
+- [x] 微信小程序
