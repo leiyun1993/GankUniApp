@@ -13,26 +13,32 @@
 			<!-- content -->
 			<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
 				<view class="cu-item arrow" @tap="onItemClick" data-type="search">
-					<view class="flex">
-						<text class="cuIcon-search text-grey"></text>
-						<text class="text-grey" style="margin-left: 5px;" >搜索干货</text>
+					<view class="flex text-df">
+						<text class="cuIcon-searchlist text-grey text-df"></text>
+						<text class="text-grey" style="margin-left: 5px;">搜索干货</text>
 					</view>
 				</view>
-				<view class="cu-item arrow">
-					<view class="flex">
-						<text class="cuIcon-calendar text-grey"></text>
+				<view class="cu-item arrow" @tap="onItemClick" data-type="history">
+					<view class="flex text-df">
+						<text class="cuIcon-countdownfill text-grey text-df"></text>
 						<text class="text-grey" style="margin-left: 5px;">历史干货</text>
 					</view>
 				</view>
+				<view class="cu-item arrow" @tap="onItemClick" data-type="github">
+					<view class="flex text-df">
+						<text class="cuIcon-github text-grey text-df"></text>
+						<text class="text-grey" style="margin-left: 5px;">其他Gank项目</text>
+					</view>
+				</view>
 				<view class="cu-item arrow" @tap="onItemClick" data-type="about">
-					<view class="flex">
-						<text class="cuIcon-info text-grey"></text>
+					<view class="flex text-df">
+						<text class="cuIcon-infofill text-grey text-df"></text>
 						<text class="text-grey" style="margin-left: 5px;">关于</text>
 					</view>
 				</view>
 				<view class="cu-item arrow" @tap="onItemClick" data-type="like">
-					<view class="flex">
-						<text class="cuIcon-like text-grey"></text>
+					<view class="flex text-df">
+						<text class="cuIcon-likefill text-grey text-df"></text>
 						<text class="text-grey" style="margin-left: 5px;">点赞</text>
 					</view>
 				</view>
@@ -70,6 +76,16 @@
 					case "search":
 						uni.navigateTo({
 							url: "/pages/my/search"
+						})
+						break;
+					case "history":
+						uni.navigateTo({
+							url: "/pages/my/history"
+						})
+						break;
+					case "github":
+						uni.navigateTo({
+							url: "/pages/my/other"
 						})
 						break;
 					case "like":

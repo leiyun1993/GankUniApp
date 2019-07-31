@@ -1,14 +1,13 @@
-<template name="home">
+<template>
 	<view>
-		<scroll-view scroll-y class="page">
-			<!-- title -->
-			<cu-custom bgColor="bg-gradual-green" :isBack="false">
-				<block slot="content">今日最新干货</block>
+		<scroll-view scroll-y class="page" lower-threshold="60px" @scrolltolower="scrolltolower">
+			<cu-custom bgColor="bg-gradual-green" :isBack="true">
+				<block slot="backText">返回</block>
+				<block slot="content">{{this.date}}</block>
 			</cu-custom>
-			<!-- content -->
 			<!-- 妹子图 -->
-			<swiper v-if="meiziList.length>0" :class="!showCardSwiper?'screen-swiper':'card-swiper'" :indicator-dots="false" :circular="true"
-			 :autoplay="true" interval="5000" duration="500" @change="cardSwiper">
+			<swiper v-if="meiziList.length>0" :class="showCardSwiper?'card-swiper':'screen-swiper'" :indicator-dots="false" :circular="true" :autoplay="true"
+			 interval="5000" duration="500" @change="cardSwiper">
 				<swiper-item v-for="(item,index) in meiziList" :key="index" :class="cardCur==index?'cur':''" @tap="onMeiZiItemClick"
 				 :data-url="item.url">
 					<view class="swiper-item" v-if="showCardSwiper">
@@ -47,9 +46,7 @@
 					</view>
 				</view>
 			</view>
-
-			<!-- 底部占位 -->
-			<view class="cu-tabbar-height"></view>
+			<view class="cu-load bg-white" v-if="showLoading" :class="loading?'loading':'over'"></view>
 		</scroll-view>
 	</view>
 </template>
@@ -59,27 +56,29 @@
 	export default {
 		data() {
 			return {
-				showCardSwiper:true,
+				date: "",
 				cardCur: 0,
 				meiziList: [],
 				dataList: [],
+				showCardSwiper: true,
+				showLoading: false,
+				loading: true
 			}
 		},
 		mounted() {
-			this.getStorageData();
-			this.getTodayInfo();
+
 		},
 		methods: {
-			getStorageData() {
-				this.meiziList = uni.getStorageSync("homeMeiZiList") || [];
-				this.dataList = uni.getStorageSync("homeDataList") || [];
+			onLoad(options) {
+				this.date = options.date;
+				this.getDetail();
 			},
-			getTodayInfo() {
-				api.get("/today")
+			getDetail() {
+				this.showLoading = true;
+				api.get(`/day/${this.date.replace(/-/g,"/")}`)
 					.then(res => {
 						this.meiziList = res.results["福利"];
-						this.showCardSwiper = this.meiziList.length>=3;
-
+						this.showCardSwiper = this.meiziList.length >= 3;
 						this.dataList = [];
 						for (let key in res.results) {
 							if (key != "福利") {
@@ -95,12 +94,9 @@
 								this.dataList.push(item);
 							}
 						}
-						uni.setStorageSync("homeDataList", [this.dataList[0]]);
-						uni.setStorageSync("homeMeiZiList", this.meiziList);
-						
-						console.log(this.meiziList.length>=3)
+						this.loading = false;
 					}).catch(e => {
-						console.log(e)
+						this.loading = false;
 					})
 			},
 			/**
@@ -126,21 +122,4 @@
 </script>
 
 <style>
-	.page {
-		height: 100vh;
-	}
-
-	.text-content {
-		margin-top: 20upx;
-	}
-
-	.flex {
-		align-items: center;
-	}
-
-	.item-image {
-		margin-left: 30upx;
-		width: 100upx;
-		height: 100upx;
-	}
 </style>

@@ -39,6 +39,18 @@
 		{
 			"path": "pages/my/search",
 			"style": {}
+		}, 
+		{
+			"path": "pages/my/history",
+			"style": {}
+		}, 
+		{
+			"path": "pages/my/detail",
+			"style": {}
+		}, 
+		{
+			"path": "pages/my/other",
+			"style": {}
 		}
 	],
 	"globalStyle": {

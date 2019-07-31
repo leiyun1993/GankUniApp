@@ -8,14 +8,16 @@
 			<!-- content -->
 			<view class="flex meizi-flex">
 				<view class="flex-sub">
-					<view class="meizi-img left-img radius shadow bg-white" :style="[{height:(index==0?190:240) + 'px'}]" v-for="(item,index) in listLeft" :key="index+item.desc" @tap="onItemClick" :data-url="item.url">
+					<view class="meizi-img left-img radius shadow bg-white" :style="[{height:(index==0?190:240) + 'px'}]" v-for="(item,index) in listLeft"
+					 :key="item.url" @tap="onItemClick" :data-url="item.url">
 						<image class="img radius" lazy-load="true" :src="item.url.replace('large','bmiddle')" mode="aspectFill"></image>
 						<view class="img-desc">{{item.desc}}</view>
 					</view>
 
 				</view>
 				<view class="flex-sub">
-					<view class="meizi-img right-img radius shadow bg-white" v-for="(item,index) in listRight" :key="index+item.desc" @tap="onItemClick" :data-url="item.url">
+					<view class="meizi-img right-img radius shadow bg-white" v-for="(item,index) in listRight" :key="item.url"
+					 @tap="onItemClick" :data-url="item.url">
 						<image class="img radius" lazy-load="true" :src="item.url.replace('large','bmiddle')" mode="aspectFill"></image>
 						<view class="img-desc">{{item.desc}}</view>
 					</view>
@@ -60,29 +62,31 @@
 						}
 						this.listLeft = this.page == 1 ? listLeft : this.listLeft.concat(listLeft);
 						this.listRight = this.page == 1 ? listRight : this.listRight.concat(listRight);
-						this.page++;
 
-						if (res.results.length === 0) {
+
+						if (res.results.length < 10) {
 							this.loading = false;
 						} else {
 							this.showLoading = false;
+							this.page++;
 						}
 					}).catch(e => {
 						if (this.page == 1) {
 							this.listLeft = [];
 							this.listRight = [];
 						}
+						this.loading = false;
 					})
 			},
 			scrolltolower() {
-				if (!this.showLoading) {
+				if (!this.showLoading && this.loading) {
 					this.getList();
 				}
 			},
-			onItemClick(event){
+			onItemClick(event) {
 				let url = event.currentTarget.dataset.url;
 				uni.previewImage({
-					urls:[url]
+					urls: [url]
 				})
 			}
 		}

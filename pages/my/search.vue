@@ -9,7 +9,8 @@
 			<view class="cu-bar search bg-white nav fixed" :style="[{top:CustomBar + 'px'}]">
 				<view class="search-form round">
 					<text class="cuIcon-search"></text>
-					<input @input="keywordInput" @confirm="searchClick" :adjust-position="false" type="text" placeholder="搜索图片、文章、视频" confirm-type="search"></input>
+					<input @input="keywordInput" @confirm="searchClick" :adjust-position="false" type="text" placeholder="搜索图片、文章、视频"
+					 confirm-type="search"></input>
 				</view>
 				<view class="action">
 					<button class="cu-btn bg-green shadow-blur round" @tap="searchClick">搜索</button>
@@ -58,7 +59,7 @@
 			}
 		},
 		mounted() {
-			
+
 		},
 		methods: {
 			getList() {
@@ -67,11 +68,12 @@
 					.then(res => {
 
 						this.dataList = this.page == 1 ? res.results : this.dataList.concat(res.results);
-						this.page++;
-						if (res.results.length === 0) {
+
+						if (res.results.length < 10) {
 							this.loading = false;
 						} else {
 							this.showLoading = false;
+							this.page++;
 						}
 					}).catch(e => {
 						if (this.page == 1) {
@@ -95,15 +97,15 @@
 				this.getList();
 			},
 			scrolltolower() {
-				if (!this.showLoading) {
+				if (!this.showLoading && this.loading) {
 					this.getList();
 				}
 			},
-			onItemClick(event){
+			onItemClick(event) {
 				let url = event.currentTarget.dataset.url;
 				console.log(url);
 				uni.navigateTo({
-					url:`/pages/web/web?url=${encodeURIComponent(url)}`
+					url: `/pages/web/web?url=${encodeURIComponent(url)}`
 				})
 			}
 		}
