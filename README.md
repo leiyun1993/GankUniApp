@@ -55,3 +55,9 @@ tabBar的实现请参考小程序入口文件[index.vue](https://github.com/leiy
 - [ ] H5
 - [ ] Android端
 - [x] 微信小程序
+
+## License
+
+MIT License
+
+Copyright (c) 2019 YunLei
