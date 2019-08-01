@@ -13,6 +13,10 @@ uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编�
 
 即使不跨端，uni-app同时也是更好的小程序开发框架。
 
+### 2.1、Android下载体验
+
+![tab页面](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/qrcode.png)
+
 ## 3、GankUniApp
 ### 3.1、使用知识点
 > * [uni-app](https://uniapp.dcloud.io/component/README)
@@ -47,6 +51,17 @@ uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编�
 然后自定义控件中设置所需高度即可[cu-custom.vue](https://github.com/leiyun1993/GankUniApp/blob/master/colorui/components/cu-custom.vue);
 
 tabBar的实现请参考小程序入口文件[index.vue](https://github.com/leiyun1993/GankUniApp/blob/master/pages/index/index.vue)
+
+### 3.5、更新说明
+
+2019-08-01
+取消自定以title
+测试Android端和H5端
+H5端由于使用开放api暂时无法解决跨域问题，所以只测试了本地。
+
+2019-07-30
+测试微信小程序端
+初版提交
 
 ## 开源组件
 [ColorUI](https://github.com/weilanwl/ColorUI/)
