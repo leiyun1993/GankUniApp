@@ -1,19 +1,15 @@
 <template>
 	<view>
 		<scroll-view scroll-y class="page" lower-threshold="60px" @scrolltolower="scrolltolower">
-			<cu-custom bgColor="bg-gradual-green" :isBack="true">
-				<block slot="backText">返回</block>
-				<block slot="content">{{this.date}}</block>
-			</cu-custom>
 			<!-- 妹子图 -->
 			<swiper v-if="meiziList.length>0" :class="showCardSwiper?'card-swiper':'screen-swiper'" :indicator-dots="false" :circular="true" :autoplay="true"
 			 interval="5000" duration="500" @change="cardSwiper">
 				<swiper-item v-for="(item,index) in meiziList" :key="index" :class="cardCur==index?'cur':''" @tap="onMeiZiItemClick"
 				 :data-url="item.url">
 					<view class="swiper-item" v-if="showCardSwiper">
-						<image :src="item.url" mode="aspectFill"></image>
+						<image :src="item.url" mode="aspectFill" referrerpolicy="no-referrer"></image>
 					</view>
-					<image :src="item.url" mode="aspectFill" v-if="!showCardSwiper"></image>
+					<image :src="item.url" mode="aspectFill" v-if="!showCardSwiper" referrerpolicy="no-referrer"></image>
 				</swiper-item>
 			</swiper>
 			<view v-for="(item,index) in dataList" :key="index">
@@ -40,7 +36,7 @@
 								</view>
 							</view>
 							<view v-if="item.images&&citem.images.length">
-								<image class="item-image" lazy-load="true" :src="citem.imageUrl" mode="aspectFill"></image>
+								<image class="item-image" lazy-load="true" :src="citem.imageUrl" mode="aspectFill" referrerpolicy="no-referrer"></image>
 							</view>
 						</view>
 					</view>
@@ -71,6 +67,9 @@
 		methods: {
 			onLoad(options) {
 				this.date = options.date;
+				uni.setNavigationBarTitle({
+					title:this.date
+				})
 				this.getDetail();
 			},
 			getDetail() {

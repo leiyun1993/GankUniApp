@@ -1,10 +1,10 @@
 <template>
 	<view>
 		<home v-if="PageCur=='home'"></home>
-		<classify v-if="PageCur=='classify'"></classify>
-		<meizi v-if="PageCur=='meizi'"></meizi>
+		<classify ref="classify" v-if="PageCur=='classify'"></classify>
+		<meizi ref="meizi" v-if="PageCur=='meizi'"></meizi>
 		<my v-if="PageCur=='my'"></my>
-		
+
 		<view class="cu-bar tabbar bg-white shadow foot">
 			<view class="action " @click="NavChange" data-cur="home" :class="PageCur=='home'?'text-green':'text-gray'">
 				<view class="cuIcon-homefill"></view> 最新
@@ -34,15 +34,50 @@
 			}
 		},
 		onLoad() {
-
+			uni.setNavigationBarTitle({
+				title: "今日最新干货"
+			})
+		},
+		onReachBottom() {
+			// #ifdef H5
+			if (this.PageCur == "classify") {
+				this.$refs.classify.scrolltolower();
+			} else if (this.PageCur == "meizi") {
+				this.$refs.meizi.scrolltolower();
+			}
+			// #endif
 		},
 		methods: {
 			NavChange(e) {
 				this.PageCur = e.currentTarget.dataset.cur;
+				let title = "GankUniApp"
+				switch (this.PageCur) {
+					case "home":
+						title = "今日最新干货";
+						break;
+					case "classify":
+						title = "分类";
+						break;
+					case "meizi":
+						title = "妹子";
+						break;
+					case "my":
+						title = "";
+						// #ifdef APP-PLUS
+						title = "我的";
+						// #endif
+
+						break;
+					default:
+						break;
+				}
+				uni.setNavigationBarTitle({
+					title: title
+				})
 			},
-			publishClick(e){
+			publishClick(e) {
 				uni.navigateTo({
-					url:`/pages/publish/publish`
+					url: `/pages/publish/publish`
 				})
 			}
 		}

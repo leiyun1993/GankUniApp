@@ -1,11 +1,6 @@
 <template>
 	<view class="bg-white">
 		<scroll-view scroll-y class="page">
-			<!-- title -->
-			<cu-custom bgColor="bg-gradual-green" :isBack="true">
-				<block slot="backText">返回</block>
-				<block slot="content">关于</block>
-			</cu-custom>
 			<view class="about-box">
 				<view class="title solid-bottom">
 					Gank.io

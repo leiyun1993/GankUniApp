@@ -1,56 +1,49 @@
 <template name="home">
 	<view>
-		<scroll-view scroll-y class="page">
-			<!-- title -->
-			<cu-custom bgColor="bg-gradual-green" :isBack="false">
-				<block slot="content">今日最新干货</block>
-			</cu-custom>
-			<!-- content -->
-			<!-- 妹子图 -->
-			<swiper v-if="meiziList.length>0" :class="!showCardSwiper?'screen-swiper':'card-swiper'" :indicator-dots="false" :circular="true"
-			 :autoplay="true" interval="5000" duration="500" @change="cardSwiper">
-				<swiper-item v-for="(item,index) in meiziList" :key="index" :class="cardCur==index?'cur':''" @tap="onMeiZiItemClick"
-				 :data-url="item.url">
-					<view class="swiper-item" v-if="showCardSwiper">
-						<image :src="item.url" mode="aspectFill"></image>
-					</view>
-					<image :src="item.url" mode="aspectFill" v-if="!showCardSwiper"></image>
-				</swiper-item>
-			</swiper>
-			<view v-for="(item,index) in dataList" :key="index">
-				<view class="cu-bar bg-white solid-bottom">
-					<view class="action">
-						<text class="cuIcon-titles text-green"></text> {{item.name}}
-					</view>
+		<!-- content -->
+		<!-- 妹子图 -->
+		<swiper v-if="meiziList.length>0" :class="!showCardSwiper?'screen-swiper':'card-swiper'" :indicator-dots="false"
+		 :circular="true" :autoplay="true" interval="5000" duration="500" @change="cardSwiper">
+			<swiper-item v-for="(item,index) in meiziList" :key="index" :class="cardCur==index?'cur':''" @tap="onMeiZiItemClick"
+			 :data-url="item.url">
+				<view class="swiper-item" v-if="showCardSwiper">
+					<image :src="item.url" mode="aspectFill" referrerpolicy="no-referrer"></image>
 				</view>
-				<view v-for="(citem,cindex) in item.data" :key="cindex" class="cu-card dynamic no-card" @tap="onItemClick"
-				 :data-url="citem.url">
-					<view class="cu-item shadow solid-bottom" style="padding: 0 30upx;">
-						<view class="flex">
-							<view class="flex-sub">
-								<view class="">
-									<view class="text-content  text-cut2">
-										{{citem.desc}}
-									</view>
-									<view class="p-xs margin-bottom-sm mb-sm" style="margin-top: 10upx;">
-										<view class="cuIcon-myfill text-green" style="width: 250upx;display: inline-block;"><text class="text-black text-cut"
-											 style="margin-left: 6upx;">{{citem.who}}</text></view>
-										<view class="cuIcon-timefill text-green" style="width: 250upx;display: inline-block;"><text class="text-black text-cut"
-											 style="margin-left: 6upx;">{{citem.publishedAt.substring(0,10)}}</text></view>
-									</view>
+				<image :src="item.url" mode="aspectFill" v-if="!showCardSwiper" referrerpolicy="no-referrer"></image>
+			</swiper-item>
+		</swiper>
+		<view v-for="(item,index) in dataList" :key="index">
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action">
+					<text class="cuIcon-titles text-green"></text> {{item.name}}
+				</view>
+			</view>
+			<view v-for="(citem,cindex) in item.data" :key="cindex" class="cu-card dynamic no-card" @tap="onItemClick" :data-url="citem.url">
+				<view class="cu-item shadow solid-bottom" style="padding: 0 30upx;">
+					<view class="flex">
+						<view class="flex-sub">
+							<view class="">
+								<view class="text-content  text-cut2">
+									{{citem.desc}}
+								</view>
+								<view class="p-xs margin-bottom-sm mb-sm" style="margin-top: 10upx;">
+									<view class="cuIcon-myfill text-green" style="width: 250upx;display: inline-block;"><text class="text-black text-cut"
+										 style="margin-left: 6upx;">{{citem.who}}</text></view>
+									<view class="cuIcon-timefill text-green" style="width: 250upx;display: inline-block;"><text class="text-black text-cut"
+										 style="margin-left: 6upx;">{{citem.publishedAt.substring(0,10)}}</text></view>
 								</view>
 							</view>
-							<view v-if="item.images&&citem.images.length">
-								<image class="item-image" lazy-load="true" :src="citem.imageUrl" mode="aspectFill"></image>
-							</view>
+						</view>
+						<view v-if="item.images&&citem.images.length">
+							<image class="item-image" lazy-load="true" :src="citem.imageUrl" mode="aspectFill" referrerpolicy="no-referrer"></image>
 						</view>
 					</view>
 				</view>
 			</view>
+		</view>
 
-			<!-- 底部占位 -->
-			<view class="cu-tabbar-height"></view>
-		</scroll-view>
+		<!-- 底部占位 -->
+		<view class="cu-tabbar-height"></view>
 	</view>
 </template>
 
@@ -59,11 +52,13 @@
 	export default {
 		data() {
 			return {
-				showCardSwiper:true,
+				showCardSwiper: true,
 				cardCur: 0,
 				meiziList: [],
 				dataList: [],
 			}
+		},
+		components: {
 		},
 		mounted() {
 			this.getStorageData();
@@ -78,7 +73,7 @@
 				api.get("/today")
 					.then(res => {
 						this.meiziList = res.results["福利"];
-						this.showCardSwiper = this.meiziList.length>=3;
+						this.showCardSwiper = this.meiziList.length >= 3;
 
 						this.dataList = [];
 						for (let key in res.results) {
@@ -97,8 +92,8 @@
 						}
 						uni.setStorageSync("homeDataList", [this.dataList[0]]);
 						uni.setStorageSync("homeMeiZiList", this.meiziList);
-						
-						console.log(this.meiziList.length>=3)
+
+						console.log(this.meiziList.length >= 3)
 					}).catch(e => {
 						console.log(e)
 					})

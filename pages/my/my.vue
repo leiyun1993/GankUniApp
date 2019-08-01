@@ -3,10 +3,10 @@
 		<scroll-view scroll-y class="page">
 			<!-- title -->
 			<view class="UCenter-bg">
-				<image :src="userInfo.avatar||'../../static/logo.png'" class="png" mode="widthFix" @tap="loginClick"></image>
+				<image :src="userInfo.avatar||'../../static/logo.png'" class="png" mode="widthFix" @tap="loginClick" referrerpolicy="no-referrer"></image>
 				<view class="text-xl margin-top" @tap="loginClick">{{userInfo.name||'请先登录'}}</view>
 				<view class="text-sm margin-top-xs" @tap="loginClick">{{userInfo.remark||empty}}</view>
-				<image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+				<image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave" referrerpolicy="no-referrer"></image>
 			</view>
 			<view class="padding flex text-center text-grey bg-white shadow-warp my-wave-margin">
 			</view>
@@ -105,7 +105,7 @@
 	.UCenter-bg {
 		background-image: url(https://image.weilanwl.com/color2.0/index.jpg);
 		background-size: cover;
-		height: 600upx;
+		height: 450upx;
 		display: flex;
 		justify-content: center;
 		padding-top: 40upx;

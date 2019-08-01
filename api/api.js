@@ -1,7 +1,11 @@
 "use strict"
 let get = (url) => new Promise((resolve, reject) => {
+	let requestUrl = `http://gank.io/api${url}`;
+	// #ifdef H5
+	requestUrl = `/h5api${url}`;
+	// #endif
 	uni.request({
-		url: `http://gank.io/api${url}`,
+		url: requestUrl,
 		method: "GET",
 		success: (res) => {
 			if (res.statusCode === 200) {

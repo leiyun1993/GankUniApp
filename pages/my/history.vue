@@ -1,20 +1,14 @@
 <template>
 	<view class="">
-		<scroll-view scroll-y class="page" lower-threshold="60px" @scrolltolower="scrolltolower">
-			<cu-custom bgColor="bg-gradual-green" :isBack="true">
-				<block slot="backText">返回</block>
-				<block slot="content">干货历史</block>
-			</cu-custom>
 
-			<view class="history-item" v-for="(item,index) in dataList" :key="index" @tap="onItemClick" :data-index="index">
-				<image class="bg-white shadow" :src="item.imageUrl" mode="aspectFill"></image>
-				<view class="item-mask">
-					<view class="time">{{item.date}}</view>
-					<view class="hot">{{item.title}}</view>
-				</view>
+		<view class="history-item" v-for="(item,index) in dataList" :key="index" @tap="onItemClick" :data-index="index">
+			<image class="bg-white shadow" :src="item.imageUrl" mode="aspectFill" referrerpolicy="no-referrer"></image>
+			<view class="item-mask">
+				<view class="time">{{item.date}}</view>
+				<view class="hot">{{item.title}}</view>
 			</view>
-			<view class="cu-load bg-white" v-if="showLoading" :class="loading?'loading':'over'"></view>
-		</scroll-view>
+		</view>
+		<view class="cu-load bg-white" v-if="showLoading" :class="loading?'loading':'over'"></view>
 	</view>
 </template>
 
@@ -33,12 +27,15 @@
 		mounted() {
 			this.getList();
 		},
+		onReachBottom() {
+			console.log("onReachBottom")
+			this.scrolltolower();
+		},
 		methods: {
 			getList() {
 				this.showLoading = true;
 				api.get(`/history/content/10/${this.page}`)
 					.then(res => {
-						console.log(res.results);
 						let exp = new RegExp('src=\"(.+?)\"');
 						res.results.map(item => {
 							item.imageUrl = exp.exec(item.content)[1];

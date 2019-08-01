@@ -1,11 +1,6 @@
 <template>
 	<view>
 		<scroll-view scroll-y class="page">
-			<!-- title -->
-			<cu-custom bgColor="bg-gradual-green" :isBack="true">
-				<block slot="backText">返回</block>
-				<block slot="content">提交干货</block>
-			</cu-custom>
 			<!-- content -->
 			<view class="cu-form-group margin-top">
 				<view class="title">网址</view>

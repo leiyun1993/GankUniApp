@@ -1,13 +1,11 @@
 <template name="classify">
 	<view>
+		<!-- #ifndef H5 -->
 		<scroll-view scroll-y class="page" lower-threshold="60px" @scrolltolower="scrolltolower">
-			<!-- title -->
-			<cu-custom bgColor="bg-gradual-green" :isBack="false">
-				<block slot="content">分类</block>
-			</cu-custom>
+			<!-- #endif -->
+
 			<!-- content -->
-			<scroll-view scroll-x class="bg-white nav fixed" :style="[{top:CustomBar + 'px'}]" scroll-with-animation
-			 :scroll-left="scrollLeft">
+			<scroll-view scroll-x class="bg-white nav fixed" :style="[{top:fixedTop+'px'}]" scroll-with-animation :scroll-left="scrollLeft">
 				<view class="cu-item" :class="index==TabCur?'text-green cur':''" v-for="(item,index) in tabs" :key="index" @tap="tabSelect"
 				 :data-id="index">
 					{{item.name}}
@@ -33,7 +31,7 @@
 								</view>
 							</view>
 							<view v-if="item.images&&item.images.length">
-								<image class="item-image" lazy-load="true" :src="item.images[0]" mode="aspectFill"></image>
+								<image class="item-image" lazy-load="true" :src="item.images[0]" mode="aspectFill" referrerpolicy="no-referrer"></image>
 							</view>
 						</view>
 					</view>
@@ -42,7 +40,10 @@
 			</view>
 			<!-- 底部占位 -->
 			<view class="cu-tabbar-height"></view>
+			<!-- #ifndef H5 -->
 		</scroll-view>
+		<!-- #endif -->
+
 	</view>
 </template>
 
@@ -91,13 +92,24 @@
 					}
 				],
 				dataList: [],
-				page: 1
+				page: 1,
+				fixedTop: 0
 			}
+		},
+		created() {
+			console.log("created");
+			// #ifdef H5
+			this.fixedTop = 44;
+			// #endif
 		},
 		mounted() {
 			this.getList();
 		},
+
 		methods: {
+			onReachBottom() {
+				console.log("onReachBottom");
+			},
 			tabSelect(event) {
 				this.TabCur = event.currentTarget.dataset.id;
 				this.scrollLeft = (event.currentTarget.dataset.id - 1) * 60;
@@ -106,10 +118,10 @@
 				this.getList();
 			},
 			getList() {
-				
+
 				if (this.page == 1) {
 					this.showTopLoading = true;
-				}else{
+				} else {
 					this.showLoading = true;
 				}
 				api.get(`/data/${this.tabs[this.TabCur].category}/10/${this.page}`)
@@ -154,5 +166,10 @@
 <style>
 	.classify-content {
 		padding-top: 90upx;
+	}
+	.item-image {
+		margin-left: 30upx;
+		width: 100upx;
+		height: 100upx;
 	}
 </style>

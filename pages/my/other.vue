@@ -1,10 +1,6 @@
 <template>
 	<view class="bg-white page-other">
 		<scroll-view scroll-y class="page" lower-threshold="60px" @scrolltolower="scrolltolower">
-			<cu-custom bgColor="bg-gradual-green" :isBack="true">
-				<block slot="backText">返回</block>
-				<block slot="content">GitHubGank</block>
-			</cu-custom>
 
 			<view v-for="(item,index) in dataList" :key="index" class="padding" @tap="onItemClick" :data-url="item.html_url">
 				<view class="solid-bottom">
@@ -18,7 +14,7 @@
 						Updated on {{item.updated_at}}
 					</view>
 					<view class="avatar-box">
-						<image :src="item.owner.avatar_url" @tap="nameClick" :data-url="item.owner.html_url"></image>
+						<image :src="item.owner.avatar_url" @tap="nameClick" :data-url="item.owner.html_url" referrerpolicy="no-referrer"></image>
 						<view class="name" @tap="nameClick" :data-url="item.owner.html_url">{{item.owner.login}}</view>
 						<view class="language">
 							<view class="icon-point" :style="[{backgroundColor:item.languageColor}]"></view>

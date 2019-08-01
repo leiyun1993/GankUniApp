@@ -1,9 +1,5 @@
 <template>
 	<view class="login-page">
-		<!-- title -->
-		<cu-custom bgColor="bg-transparent" :isBack="true">
-			<block slot="content">登录</block>
-		</cu-custom>
 		<view class="">
 			<view class="radius bg-white shadow login-box padding" style="padding-bottom: 60upx;">
 				<view class="cu-item solid-bottom">

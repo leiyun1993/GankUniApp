@@ -6,7 +6,9 @@
 		},
 		{
 			"path": "pages/home/home",
-			"style": {}
+			"style": {
+				"enablePullDownRefresh": false
+			}
 		},
 		{
 			"path": "pages/classify/classify",
@@ -22,35 +24,47 @@
 		},
 		{
 			"path": "pages/publish/publish",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "提交干货"
+			}
 		},
 		{
 			"path": "pages/my/login",
-			"style": {}
-		}, 
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
 		{
 			"path": "pages/web/web",
 			"style": {}
-		}, 
+		},
 		{
 			"path": "pages/my/about",
-			"style": {}
-		}, 
+			"style": {
+				"navigationBarTitleText": "关于GankUniApp"
+			}
+		},
 		{
 			"path": "pages/my/search",
-			"style": {}
-		}, 
+			"style": {
+				"navigationBarTitleText": "搜索干货"
+			}
+		},
 		{
 			"path": "pages/my/history",
-			"style": {}
-		}, 
+			"style": {
+				"navigationBarTitleText": "历史干货"
+			}
+		},
 		{
 			"path": "pages/my/detail",
 			"style": {}
-		}, 
+		},
 		{
 			"path": "pages/my/other",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "GitHubGank"
+			}
 		}
 	],
 	"globalStyle": {
@@ -59,9 +73,9 @@
 			"transparentTitle": "always",
 			"allowsBounceVertical": "NO"
 		},
-		"navigationBarBackgroundColor": "#39b54a",
+		"navigationBarBackgroundColor": "#FFFFFF",
 		"navigationBarTitleText": "GankUniApp",
-		"navigationStyle": "custom",
-		"navigationBarTextStyle": "white"
+		"navigationStyle": "default",
+		"navigationBarTextStyle": "black"
 	}
 }

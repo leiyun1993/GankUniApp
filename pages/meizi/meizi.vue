@@ -1,24 +1,23 @@
 <template name="classify">
 	<view>
+		<!-- #ifndef H5 -->
 		<scroll-view scroll-y class="page" lower-threshold="60px" @scrolltolower="scrolltolower">
-			<!-- title -->
-			<cu-custom bgColor="bg-gradual-green" :isBack="false">
-				<block slot="content">妹子</block>
-			</cu-custom>
+			<!-- #endif -->
+
 			<!-- content -->
 			<view class="flex meizi-flex">
 				<view class="flex-sub">
 					<view class="meizi-img left-img radius shadow bg-white" :style="[{height:(index==0?190:240) + 'px'}]" v-for="(item,index) in listLeft"
 					 :key="item.url" @tap="onItemClick" :data-url="item.url">
-						<image class="img radius" lazy-load="true" :src="item.url.replace('large','bmiddle')" mode="aspectFill"></image>
+						<image class="img radius" lazy-load="true" :src="item.url.replace('large','bmiddle')" mode="aspectFill" referrerpolicy="no-referrer"></image>
 						<view class="img-desc">{{item.desc}}</view>
 					</view>
 
 				</view>
 				<view class="flex-sub">
-					<view class="meizi-img right-img radius shadow bg-white" v-for="(item,index) in listRight" :key="item.url"
-					 @tap="onItemClick" :data-url="item.url">
-						<image class="img radius" lazy-load="true" :src="item.url.replace('large','bmiddle')" mode="aspectFill"></image>
+					<view class="meizi-img right-img radius shadow bg-white" v-for="(item,index) in listRight" :key="item.url" @tap="onItemClick"
+					 :data-url="item.url">
+						<image class="img radius" lazy-load="true" :src="item.url.replace('large','bmiddle')" mode="aspectFill" referrerpolicy="no-referrer"></image>
 						<view class="img-desc">{{item.desc}}</view>
 					</view>
 				</view>
@@ -27,7 +26,9 @@
 
 			<!-- 底部占位 -->
 			<view class="cu-tabbar-height"></view>
+			<!-- #ifndef H5 -->
 		</scroll-view>
+		<!-- #endif -->
 	</view>
 </template>
 
