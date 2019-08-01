@@ -67,8 +67,10 @@ H5端由于使用开放api暂时无法解决跨域问题，所以只测试了本
 [ColorUI](https://github.com/weilanwl/ColorUI/)
 
 ## TODO
-- [ ] H5
-- [ ] Android端
+- [ ] alipay小程序
+- [ ] iOS
+- [x] H5
+- [x] Android端
 - [x] 微信小程序
 
 ## License
