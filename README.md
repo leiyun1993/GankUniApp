@@ -40,8 +40,6 @@ uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编�
 ![tab页面](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/01.jpg)
  
 ![我的相关](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/02.jpg)
- 
-![登录、发布](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/03.jpg)
 
 ### 3.4、titleBar和tabBar说明
 二者均使用自定义完成,均使用[ColorUI](https://github.com/weilanwl/ColorUI/)组件库的开源样式。
@@ -54,13 +52,25 @@ tabBar的实现请参考小程序入口文件[index.vue](https://github.com/leiy
 
 ### 3.5、更新说明
 
-2019-08-01
+**2019-08-02**
+
+更新模拟登录后数据刷新问题
+
+更新App预览截图（使用androidApp截图）
+
+
+**2019-08-01**
+
 取消自定以title
+
 测试Android端和H5端
+
 H5端由于使用开放api暂时无法解决跨域问题，所以只测试了本地。
 
-2019-07-30
+**2019-07-30**
+
 测试微信小程序端
+
 初版提交
 
 ## 开源组件

@@ -55,10 +55,16 @@
 		data: () => {
 			return {
 				empty: "~~(>_<)~~",
-				userInfo: uni.getStorageSync("userInfo")
+				userInfo: {}
 			}
 		},
+		mounted() {
+			this.getUserInfo();
+		},
 		methods: {
+			getUserInfo(){
+				this.userInfo = uni.getStorageSync("userInfo");
+			},
 			loginClick() {
 				uni.navigateTo({
 					url: "/pages/my/login"

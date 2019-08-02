@@ -3,7 +3,7 @@
 		<home v-if="PageCur=='home'"></home>
 		<classify ref="classify" v-if="PageCur=='classify'"></classify>
 		<meizi ref="meizi" v-if="PageCur=='meizi'"></meizi>
-		<my v-if="PageCur=='my'"></my>
+		<my ref="my" v-if="PageCur=='my'"></my>
 
 		<view class="cu-bar tabbar bg-white shadow foot">
 			<view class="action " @click="NavChange" data-cur="home" :class="PageCur=='home'?'text-green':'text-gray'">
@@ -37,6 +37,11 @@
 			uni.setNavigationBarTitle({
 				title: "今日最新干货"
 			})
+		},
+		onShow() {
+			if (this.PageCur == "my") {
+				this.$refs.my.getUserInfo();
+			}
 		},
 		onReachBottom() {
 			// #ifdef H5
