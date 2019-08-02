@@ -15,7 +15,7 @@ uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编�
 
 ### 2.1、Android下载体验
 
-![tab页面](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/qrcode.png)
+![tab页面](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/qrcode_102.png)
 
 ## 3、GankUniApp
 ### 3.1、使用知识点
