@@ -37,9 +37,9 @@ uni-app 是一个使用 Vue.js 开发所有前端应用的框架，开发者编�
 
 ### 3.3、小程序预览
 
-![tab页面](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/01.jpg)
+![tab页面](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/001.jpg)
  
-![我的相关](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/02.jpg)
+![我的相关](https://github.com/leiyun1993/GankUniApp/raw/master/screenshot/002.jpg)
 
 ### 3.4、titleBar和tabBar说明
 二者均使用自定义完成,均使用[ColorUI](https://github.com/weilanwl/ColorUI/)组件库的开源样式。
